@@ -23,5 +23,10 @@ export default {
       name: "product",
       component: () => import("../pages/admin/Product.vue"),
     },
+    {
+      path: "/images",
+      name: "images",
+      component: () => import("../pages/admin/Images.vue"),
+    },
   ],
 };

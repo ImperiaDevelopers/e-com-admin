@@ -1,5 +1,5 @@
 import {
-  mdiAccount,
+  mdiImageArea,
   mdiAccountCog,
   mdiApple,
   mdiDoorOpen,
@@ -31,6 +31,12 @@ export const AdminMenu = [
     label: "Brand",
     name: "product_brand",
     icon: mdiApple,
+  },
+  {
+    path: "/images",
+    label: "Images",
+    name: "images",
+    icon: mdiImageArea,
   },
   {
     path: "/admin_profile",

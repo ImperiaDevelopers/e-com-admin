@@ -5,7 +5,7 @@
         class="main w-[636px] h-[666px] flex flex-col items-center p-10 rounded-3xl"
       >
         <h1 class="text-[44px] text-center font-bold text-white font-[Inter]">
-          Najot Ta'limga
+          Ahyo.uzning admini
         </h1>
         <p class="text-[32px] text-center font-normal text-white font-[Inter]">
           Xush kelibsiz!
