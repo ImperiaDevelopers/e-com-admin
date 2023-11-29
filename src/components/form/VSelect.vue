@@ -14,9 +14,9 @@
         class="custom-select-option text-paragraph-default"
         v-for="(option, index) in options"
         :key="`${index}${option}`"
-        :value="option.name ? option.name : option"
+        :value="option.id ? option.id : option"
       >
-        {{ option.name ? option.name : option }}
+        {{ option.name ? option.name : option.category_name }}
       </option>
     </vee-field>
     <ErrorMessage

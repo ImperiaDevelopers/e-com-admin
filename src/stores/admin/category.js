@@ -8,13 +8,23 @@ export const useCategoryStore = defineStore({
   id: "category",
   state: () => ({
     category: [],
+    ParCat: [],
   }),
   actions: {
     async getCategorys() {
       try {
         let res = await adminCategory.getCategorys();
-        this.category = res
+        this.category = res;
         console.log(this.category);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getParCat() {
+      try {
+        let res = await adminCategory.getParCat();
+        this.ParCat = res;
+        console.log(this.ParCat, "category.js");
       } catch (error) {
         console.log(error);
       }

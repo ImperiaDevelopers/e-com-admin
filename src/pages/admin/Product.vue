@@ -16,13 +16,13 @@
     </div>
     <AppTAble :headers="headers" :body="store?.products">
       <template #body_category="{ item }"
-        ><h1>{{ item.category.category_name }}</h1>
+        ><h1>{{ item?.category?.category_name }}</h1>
       </template>
       <template #body_product_brand="{ item }"
-        ><h1>{{ item.product_brand.name }}</h1>
+        ><h1>{{ item?.product_brand?.name }}</h1>
       </template>
       <template #body_product_model="{ item }"
-        ><h1>{{ item.product_model.name }}</h1>
+        ><h1>{{ item?.product_model?.name }}</h1>
       </template>
       <template #body_action="{ item }">
         <VActions :item="item" :modal_value="product_modal" />
@@ -49,6 +49,7 @@ import AppTAble from "../../components/ui/AppTable.vue";
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 import VActions from "../../components/form/VActions.vue";
+
 const loading = ref(false);
 const store = useProductStore();
 const product_modal = ref();
@@ -72,7 +73,7 @@ const headers = ref([
   { title: "Action", value: "action" },
 ]);
 
-onMounted(() => {
+onMounted(async () => {
   store.getProducts(params);
 });
 </script>

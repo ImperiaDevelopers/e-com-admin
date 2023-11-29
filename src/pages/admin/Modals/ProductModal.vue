@@ -16,25 +16,24 @@
         name="price"
         placeHolderProps="Price"
       />
-      <VInput
-        type="number"
-        label="Category Id"
+      <VSelect
+        label="Select Category"
         name="category_id"
-        placeHolderProps="Category Id"
-      />
-      <VInput
-        type="number"
-        label="Brand Id"
-        name="product_brand_id"
-        placeHolderProps="Brand Id"
-      />
-      <VInput
-        type="number"
-        label="Model Id"
+        :options="categoryStore.ParCat"
+      >
+      </VSelect>
+      <VSelect
+        label="Select Model"
         name="product_model_id"
-        placeHolderProps="Model Id"
-      />
-
+        :options="modelStore.product_model"
+      >
+      </VSelect>
+      <VSelect
+        label="Select Brand"
+        name="product_brand_id"
+        :options="brandStore.product_brand"
+      >
+      </VSelect>
       <VButton
         type="submit"
         btn_type="primary"
@@ -50,12 +49,20 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, watch } from "vue";
+import { ref, computed, reactive, watch, onMounted } from "vue";
 import appModal from "../../../components/ui/app-modal.vue";
 import VInput from "../../../components/form/VInput.vue";
 import VButton from "../../../components/form/VButton.vue";
 import { useProductStore } from "../../../stores/admin/product";
 import VDelete from "../../../components/form/VDelete.vue";
+import { useCategoryStore } from "../../../stores/admin/category";
+import { useBrandStore } from "../../../stores/admin/brand";
+import { useModelStore } from "../../../stores/admin/model";
+import VSelect from "../../../components/form/VSelect.vue";
+
+const categoryStore = useCategoryStore();
+const modelStore = useModelStore();
+const brandStore = useBrandStore();
 const store = useProductStore();
 const dialog = ref(false);
 const dialog1 = ref(false);
@@ -109,6 +116,13 @@ watch(dialog, (value) => {
     title.value = "Add";
   }
 });
+onMounted(() => {
+  categoryStore.getParCat();
+  brandStore.getBrands();
+  modelStore.getModels();
+
+  console.log("modal");
+});
 const send = async (values) => {
   loading.value = true;
   let payload = {
@@ -125,7 +139,7 @@ const send = async (values) => {
   }
   loading.value = false;
 
-  location.reload();
+  // location.reload();
 };
 defineExpose({ openModal, openDeleteModal });
 </script>
