@@ -4,10 +4,10 @@ import auth from "./auth";
 import admin from "./admin";
 
 import notfound from "./notfound";
-import nProgress from 'nprogress'
+import nProgress from "nprogress";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [auth,admin, notfound],
+  routes: [auth, admin, notfound],
 });
 router.beforeResolve((to, from, next) => {
   nProgress.start();
@@ -23,10 +23,8 @@ router.beforeEach((to, from, next) => {
     return next({ name: "auth" });
   } else {
     if (token && name) {
-      if (role === "admin") {
-        return next({ name: "students" });
-      } else if (role === "director") {
-        return next({ name: "staffs" });
+      if (role === "Admin") {
+        return next({ name: "product" });
       }
     } else {
       next();
@@ -37,6 +35,5 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   nProgress.done();
 });
-
 
 export default router;

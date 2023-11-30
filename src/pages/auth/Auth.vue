@@ -11,7 +11,13 @@
           Xush kelibsiz!
         </p>
         <vee-form :validation-schema="schema" @submit="save" class="mt-[80px]">
-          <VInput label="Email" name="email" type="email" placeHolderProps="Enter email"></VInput>
+          <VInput
+            label="Email"
+            name="email"
+            type="email"
+            placeHolderProps="Enter email"
+            color="#fff"
+          ></VInput>
           <!-- <VTelInput
             type="text"
             name="phone"
@@ -50,7 +56,7 @@ import { computed, ref } from "vue";
 import VTelInput from "../../components/form/VTelInput.vue";
 import VPassINput from "../../components/form/VPassINput.vue";
 import VButton from "../../components/form/VAuthButton.vue";
-import VInput from '../../components/form/VInput.vue'
+import VInput from "../../components/form/VInput.vue";
 import { useAuthStore } from "../../stores/auth";
 const authstore = useAuthStore();
 const schema = computed(() => {
@@ -70,17 +76,14 @@ const btn_title = computed(() => {
 
 const save = async (values) => {
   loading.value = true;
- 
+
   let payload = {
     email: values.email,
     password: values.password,
   };
-  await authstore.authLogin(payload)
+  await authstore.authLogin(payload);
   loading.value = false;
-
 };
-
-
 </script>
 
 <style scoped>

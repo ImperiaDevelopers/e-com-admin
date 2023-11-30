@@ -1,8 +1,10 @@
 <template>
   <div class="w-full flex flex-col">
-    <label :for="name" class="text-white text-[20px] font-normal">{{
-      label
-    }}</label>
+    <label
+      :for="name"
+      :class="{ 'text-[white]': color, 'text-dblue': !color }"
+      >{{ label }}</label
+    >
     <vee-field
       v-if="mask"
       v-mask="mask"
@@ -17,7 +19,7 @@
       :type="type"
       :name="name"
       :placeholder="placeHolderProps"
-      class="p-[14px] text-[21px] outline-none  rounded-xl"
+      class="p-[14px] text-[21px] outline-none rounded-xl"
     ></vee-field>
     <ErrorMessage :name="name" class="text-[crimson] font-[700] text-[20px]" />
   </div>
@@ -39,6 +41,9 @@ const props = defineProps({
     type: String,
   },
   mask: {
+    type: String,
+  },
+  color: {
     type: String,
   },
 });

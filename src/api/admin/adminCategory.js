@@ -5,6 +5,10 @@ const adminCategory = {
     const url = `category/all`;
     return axiosClient.get(url);
   },
+  getParCat() {
+    const url = `category/parcat`;
+    return axiosClient.get(url);
+  },
   getCategoryByID(id) {
     const url = `category/${id}`;
     return axiosClient.get(url);
