@@ -21,23 +21,7 @@
         name="category_brand_id"
         placeHolderProps="Brand Id"
       />
-      <!-- <VSelect
-        label="Select Brand"
-        name="category_brand_id"
-        :options="modelStore.product_model"
-      ></VSelect> -->
-      <!-- <select
-        name="category"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      >
-        <option
-          v-for="(item, index) in categoryStore.ParCat"
-          :key="index"
-          :value="item.id"
-        >
-          {{ item.category_name }}
-        </option>
-      </select> -->
+
       <VInput type="text" label="Image" name="image" placeHolderProps="Image" />
 
       <VButton
@@ -55,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, watch, onMounted } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import appModal from "../../../components/ui/app-modal.vue";
 import VInput from "../../../components/form/VInput.vue";
 import VButton from "../../../components/form/VButton.vue";
@@ -63,7 +47,7 @@ import { useModelStore } from "../../../stores/admin/model";
 import VDelete from "../../../components/form/VDelete.vue";
 import { displayNotification } from "../../../plugins/notification";
 import { useCategoryStore } from "../../../stores/admin/category";
-import VSelect from "../../../components/form/VSelect.vue",
+import VSelect from "../../../components/form/VSelect.vue";
 
 const categoryStore = useCategoryStore();
 const store = useModelStore();

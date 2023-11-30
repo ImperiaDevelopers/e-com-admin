@@ -28,5 +28,10 @@ export default {
       name: "images",
       component: () => import("../pages/admin/Images.vue"),
     },
+    {
+      path: "/admin_profile",
+      name: "profile",
+      component: () => import("../pages/admin/Profile.vue"),
+    },
   ],
 };

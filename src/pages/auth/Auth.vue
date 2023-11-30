@@ -18,12 +18,6 @@
             placeHolderProps="Enter email"
             color="#fff"
           ></VInput>
-          <!-- <VTelInput
-            type="text"
-            name="phone"
-            label="Telefon raqam"
-            placeholder="(00) 000 00 00"
-          ></VTelInput> -->
           <VPassINput
             name="password"
             type="text"
@@ -34,18 +28,6 @@
             btn_title
           }}</VButton>
         </vee-form>
-        <!-- <div v-if="authstore.roles.length > 0">
-          <select v-model="selected">
-            <option
-              :value="item"
-              v-for="(item, index) in authstore.roles"
-              :key="index"
-            >
-              {{ item }}
-            </option>
-          </select>
-          <button @click="saveForm">Save form</button>
-        </div> -->
       </div>
     </div>
   </main>

@@ -26,18 +26,12 @@
 import SvgIcon from "@jamescoyle/vue-icon";
 import { AdminMenu } from "../menu/AdminMenu";
 import { useSidebar } from "../../hooks/useSidebar";
-import { DirectorMenu } from "../menu/DirectorMenu";
-import { TeacherMenu } from "../menu/TeacherMenu";
 import { computed } from "vue";
 const isOpen = useSidebar();
 let role = localStorage.getItem("role");
 const menu = computed(() => {
   if (role == "Admin") {
     return AdminMenu;
-  } else if (role == "director") {
-    return DirectorMenu;
-  } else if (role == "teacher") {
-    return TeacherMenu;
   }
 });
 </script>

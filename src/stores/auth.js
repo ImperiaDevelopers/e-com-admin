@@ -9,7 +9,7 @@ export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
     user: null,
-    roles: [],
+    role: "",
     image: "",
   }),
   actions: {
@@ -17,7 +17,8 @@ export const useAuthStore = defineStore({
       try {
         let res = await authApi.login(payload);
         if (res?.tokens?.access_token) {
-          localStorage.setItem("role", 'Admin');
+          localStorage.setItem("role", "Admin");
+          localStorage.setItem("id", res?.admin?.id);
           localStorage.setItem("token", res?.tokens?.access_token);
           await router.push({ name: "admin" });
         }
@@ -32,8 +33,9 @@ export const useAuthStore = defineStore({
       displayNotification();
     },
     async getProfile() {
+      const id = localStorage.getItem("id");
       try {
-        let res = await authProfile.getProfile();
+        let res = await authApi.getUser(id);
         this.user = res;
       } catch (error) {
         console.log(error);
