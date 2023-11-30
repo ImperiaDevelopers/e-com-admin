@@ -9,36 +9,30 @@
       class="p-10 flex flex-col"
       :initial-values="forms"
     >
+      <VSelect
+        label="Select Product"
+        name="product_id"
+        :options="productStore.products"
+      >
+      </VSelect>
+      <!-- <VInput
+        type="number"
+        label="Product ID"
+        name="prdouct_id"
+        placeHolderProps="Product ID"
+      /> -->
       <VInput
-        type="text"
-        label="Model Name"
-        name="name"
-        placeHolderProps="Model name"
+        type="number"
+        label="Duration"
+        name="duration"
+        placeHolderProps="Duration"
       />
       <VInput
         type="number"
-        label="Brand Id"
-        name="category_brand_id"
-        placeHolderProps="Brand Id"
+        label="Percent"
+        name="percent"
+        placeHolderProps="Percent"
       />
-      <!-- <VSelect
-        label="Select Brand"
-        name="category_brand_id"
-        :options="modelStore.product_model"
-      ></VSelect> -->
-      <!-- <select
-        name="category"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      >
-        <option
-          v-for="(item, index) in categoryStore.ParCat"
-          :key="index"
-          :value="item.id"
-        >
-          {{ item.category_name }}
-        </option>
-      </select> -->
-      <VInput type="text" label="Image" name="image" placeHolderProps="Image" />
 
       <VButton
         type="submit"
@@ -50,7 +44,7 @@
     </vee-form>
   </app-modal>
   <app-modal v-model="dialog1">
-    <VDelete v-model="dialog1" :deleteUser="deleteModel" />
+    <VDelete v-model="dialog1" :deleteUser="deleteProductStock" />
   </app-modal>
 </template>
 
@@ -59,14 +53,14 @@ import { ref, computed, reactive, watch, onMounted } from "vue";
 import appModal from "../../../components/ui/app-modal.vue";
 import VInput from "../../../components/form/VInput.vue";
 import VButton from "../../../components/form/VButton.vue";
-import { useModelStore } from "../../../stores/admin/model";
+import { useProductStockStore } from "../../../stores/admin/productStock";
 import VDelete from "../../../components/form/VDelete.vue";
 import { displayNotification } from "../../../plugins/notification";
-import { useCategoryStore } from "../../../stores/admin/category";
 import VSelect from "../../../components/form/VSelect.vue";
+import { useProductStore } from "../../../stores/admin/product";
+const store = useProductStockStore();
+const productStore = useProductStore();
 
-const categoryStore = useCategoryStore();
-const store = useModelStore();
 const dialog = ref(false);
 const dialog1 = ref(false);
 const uid = ref("");
@@ -74,11 +68,23 @@ const uid = ref("");
 const loading = ref(false);
 const title = ref("Add");
 const forms = ref({
-  name: "",
-  category_brand_id: null,
-  image: "",
+  product_id: "",
+  duration: "",
+  percent: "",
 });
 
+const params = {
+  page: 1,
+  limit: 10,
+  last_page: null,
+  count: null,
+};
+
+onMounted(async () => {
+  store.getProductStocks();
+  productStore.getProducts(params);
+  console.log("modal");
+});
 const openModal = (item) => {
   if (item) {
     title.value = "Edit";
@@ -92,16 +98,11 @@ const openDeleteModal = (id) => {
   dialog1.value = true;
   uid.value = id;
 };
-
-onMounted(() => {
-  categoryStore.getParCat();
-  console.log("modal");
-});
 const schema = computed(() => {
   return {
-    name: "required|min:1|max:25",
-    category_brand_id: "required",
-    image: "required",
+    product_id: "required|min:1|max:25",
+    duration: "required",
+    percent: "required",
   };
 });
 const btn_title = computed(() => {
@@ -111,8 +112,8 @@ const btn_title = computed(() => {
     return "Save";
   }
 });
-const deleteModel = async () => {
-  await store.deleteModel(uid.value);
+const deleteProductStock = async () => {
+  await store.deleteProductStock(uid.value);
   dialog1.value = false;
   location.reload();
 };
@@ -125,15 +126,15 @@ watch(dialog, (value) => {
 const send = async (values) => {
   loading.value = true;
   let payload = {
-    name: values.name,
-    category_brand_id: values.category_brand_id,
-    image: values.image,
+    product_id: values.product_id,
+    duration: values.duration,
+    percent: values.percent,
   };
-  if (!forms.value.name) {
-    await store.createModel(values);
+  if (!forms.value.percent) {
+    await store.createProductStock(values);
   } else {
     console.log(forms.value.id);
-    await store.updateModel(payload, forms.value.id);
+    await store.updateProductStock(payload, forms.value.id);
   }
   loading.value = false;
 

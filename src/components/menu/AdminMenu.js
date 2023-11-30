@@ -33,9 +33,9 @@ export const AdminMenu = [
     icon: mdiApple,
   },
   {
-    path: "/admin_profile",
-    label: "Profile",
-    name: "admin_profile",
-    icon: mdiAccountCog,
+    path: "/product_in_stock",
+    label: "ProductInStock",
+    name: "product_in_stock",
+    icon: mdiApple,
   },
 ];

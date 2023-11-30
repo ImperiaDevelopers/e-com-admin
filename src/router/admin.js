@@ -23,5 +23,10 @@ export default {
       name: "product",
       component: () => import("../pages/admin/Product.vue"),
     },
+    {
+      path: "/product_in_stock",
+      name: "product_in_stock",
+      component: () => import("../pages/admin/ProductStock.vue"),
+    },
   ],
 };

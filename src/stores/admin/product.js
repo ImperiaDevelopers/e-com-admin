@@ -15,7 +15,7 @@ export const useProductStore = defineStore({
         let res = await adminProduct.getProducts(params);
         params.last_page = Math.ceil(res.count / params.limit);
         params.count = res.count;
-        // console.log(res.products);
+        console.log(res.products);
         this.products = res;
       } catch (error) {
         console.log(error);
