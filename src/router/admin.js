@@ -33,5 +33,20 @@ export default {
       name: "profile",
       component: () => import("../pages/admin/Profile.vue"),
     },
+    {
+      path: "/product_in_stock",
+      name: "product_in_stock",
+      component: () => import("../pages/admin/ProductStock.vue"),
+    },
+    {
+      path: "/product_information",
+      name: "product_information",
+      component: () => import("../pages/admin/ProductInfo.vue"),
+    },
+    {
+      path: "/performance",
+      name: "performance",
+      component: () => import("../pages/admin/Performance.vue"),
+    },
   ],
 };

@@ -5,6 +5,9 @@ import {
   mdiDoorOpen,
   mdiFormatListGroup,
   mdiTelevision,
+  mdiSale,
+  mdiInformationBoxOutline,
+  mdiChartLineVariant,
 } from "@mdi/js";
 
 export const AdminMenu = [
@@ -37,6 +40,24 @@ export const AdminMenu = [
     label: "Images",
     name: "images",
     icon: mdiImageArea,
+  },
+  {
+    path: "/product_in_stock",
+    label: "ProductInStock",
+    name: "product_in_stock",
+    icon: mdiSale,
+  },
+  {
+    path: "/product_information",
+    label: "ProductInformation",
+    name: "product_information",
+    icon: mdiInformationBoxOutline,
+  },
+  {
+    path: "/performance",
+    label: "Performance",
+    name: "performance",
+    icon: mdiChartLineVariant,
   },
   {
     path: "/admin_profile",

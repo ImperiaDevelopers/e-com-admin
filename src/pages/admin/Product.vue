@@ -21,6 +21,9 @@
       <template #body_product_brand="{ item }"
         ><h1>{{ item?.product_brand?.name }}</h1>
       </template>
+      <template #body_price="{ item }"
+        ><h1>{{ formatPrice(item?.price) }}</h1>
+      </template>
       <template #body_product_model="{ item }"
         ><h1>{{ item?.product_model?.name }}</h1>
       </template>
@@ -53,6 +56,13 @@ import VActions from "../../components/form/VActions.vue";
 const loading = ref(false);
 const store = useProductStore();
 const product_modal = ref();
+
+const formatPrice = (price) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(2);
+  }
+  return "";
+};
 
 const params = {
   page: 1,
