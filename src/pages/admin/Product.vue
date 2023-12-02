@@ -80,6 +80,7 @@ const headers = ref([
   { title: "Category", value: "category" },
   { title: "Brand", value: "product_brand" },
   { title: "Model", value: "product_model" },
+  { title: "Quantity", value: "quantity" },
   { title: "Action", value: "action" },
 ]);
 

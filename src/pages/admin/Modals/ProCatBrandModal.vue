@@ -9,35 +9,16 @@
       class="p-10 flex flex-col"
       :initial-values="forms"
     >
-      <VInput type="text" label="Name" name="name" placeHolderProps="Name" />
-      <VInput
-        type="number"
-        label="Price"
-        name="price"
-        placeHolderProps="Price"
-      />
-      <VInput
-        type="number"
-        label="Quantity"
-        name="quantity"
-        placeHolderProps="Quantity"
-      />
       <VSelect
         label="Select Category"
         name="category_id"
-        :options="categoryStore.ParCat"
+        :options="categoryStore.category"
       >
       </VSelect>
       <VSelect
-        label="Select Model"
-        name="product_model_id"
-        :options="modelStore.product_model"
-      >
-      </VSelect>
-      <VSelect
-        label="Select Brand"
-        name="product_brand_id"
-        :options="brandStore.product_brand"
+        label="Select ProBrand"
+        name="pro_brend_id"
+        :options="proBrandstore.pro_brands"
       >
       </VSelect>
       <VButton
@@ -50,26 +31,25 @@
     </vee-form>
   </app-modal>
   <app-modal v-model="dialog1">
-    <VDelete v-model="dialog1" :deleteUser="deleteProduct" />
+    <VDelete v-model="dialog1" :deleteUser="deleteProCatBrand" />
   </app-modal>
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted } from "vue";
 import appModal from "../../../components/ui/app-modal.vue";
-import VInput from "../../../components/form/VInput.vue";
 import VButton from "../../../components/form/VButton.vue";
-import { useProductStore } from "../../../stores/admin/product";
 import VDelete from "../../../components/form/VDelete.vue";
-import { useCategoryStore } from "../../../stores/admin/category";
-import { useBrandStore } from "../../../stores/admin/brand";
-import { useModelStore } from "../../../stores/admin/model";
+import { displayNotification } from "../../../plugins/notification";
 import VSelect from "../../../components/form/VSelect.vue";
+import { useCategoryStore } from "../../../stores/admin/category";
+import { useProBrandStore } from "../../../stores/admin/proBrand";
+import { useProCatBrandStore } from "../../../stores/admin/proCatBrand";
 
+const store = useProCatBrandStore();
+const proBrandstore = useProBrandStore();
 const categoryStore = useCategoryStore();
-const modelStore = useModelStore();
-const brandStore = useBrandStore();
-const store = useProductStore();
+
 const dialog = ref(false);
 const dialog1 = ref(false);
 const uid = ref("");
@@ -77,12 +57,8 @@ const uid = ref("");
 const loading = ref(false);
 const title = ref("Add");
 const forms = ref({
-  name: "",
-  price: null,
+  pro_brend_id: null,
   category_id: null,
-  product_brand_id: null,
-  product_model_id: null,
-  quantity: "",
 });
 
 const openModal = (item) => {
@@ -100,8 +76,8 @@ const openDeleteModal = (id) => {
 };
 const schema = computed(() => {
   return {
-    name: "required|min:1|max:30",
-    price: "required|min:1|max:30",
+    pro_brend_id: "required",
+    category_id: "required",
   };
 });
 const btn_title = computed(() => {
@@ -111,44 +87,38 @@ const btn_title = computed(() => {
     return "Save";
   }
 });
-const deleteProduct = async () => {
-  await store.deleteProduct(uid.value);
+const deleteProCatBrand = async () => {
+  await store.deleteProCatBrand(uid.value);
   dialog1.value = false;
   location.reload();
 };
-
 watch(dialog, (value) => {
   if (!value) {
     forms.value = {};
     title.value = "Add";
   }
 });
-onMounted(() => {
-  categoryStore.getParCat();
-  brandStore.getBrands();
-  modelStore.getModels();
-
-  console.log("modal");
-});
 const send = async (values) => {
   loading.value = true;
   let payload = {
-    name: values.name,
-    price: values.price,
+    pro_brend_id: values.pro_brend_id,
     category_id: values.category_id,
-    product_brand_id: values.product_brand_id,
-    product_model_id: values.product_model_id,
-    quantity: values.quantity,
   };
-  if (!forms.value.name) {
-    await store.createProduct(values);
+  if (!forms.value.category_id) {
+    await store.createProCatBrand(values);
   } else {
-    await store.updateProduct(payload, forms.value.id);
+    await store.updateProCatBrand(payload, forms.value.id);
   }
   loading.value = false;
-
   location.reload();
 };
+
+onMounted(async () => {
+  categoryStore.getCategorys();
+  proBrandstore.getProBrands();
+});
+
+displayNotification();
 defineExpose({ openModal, openDeleteModal });
 </script>
 

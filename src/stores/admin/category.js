@@ -15,7 +15,6 @@ export const useCategoryStore = defineStore({
       try {
         let res = await adminCategory.getCategorys();
         this.category = res;
-        console.log(this.category);
       } catch (error) {
         console.log(error);
       }

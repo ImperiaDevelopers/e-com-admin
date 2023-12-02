@@ -48,5 +48,15 @@ export default {
       name: "performance",
       component: () => import("../pages/admin/Performance.vue"),
     },
+    {
+      path: "/product_category_brand",
+      name: "product_category_brand",
+      component: () => import("../pages/admin/ProCategoryBrand.vue"),
+    },
+    {
+      path: "/product_performance_group",
+      name: "product_performance_group",
+      component: () => import("../pages/admin/ProPerformanceGroup.vue"),
+    },
   ],
 };

@@ -8,6 +8,8 @@ import {
   mdiSale,
   mdiInformationBoxOutline,
   mdiChartLineVariant,
+  mdiLightbulbGroup,
+  mdiShapePlusOutline,
 } from "@mdi/js";
 
 export const AdminMenu = [
@@ -58,6 +60,18 @@ export const AdminMenu = [
     label: "Performance",
     name: "performance",
     icon: mdiChartLineVariant,
+  },
+  {
+    path: "/product_performance_group",
+    label: "Pro. perform. g.",
+    name: "product_performance_group",
+    icon: mdiLightbulbGroup,
+  },
+  {
+    path: "/product_category_brand",
+    label: "Product category brand",
+    name: "product_category_brand",
+    icon: mdiShapePlusOutline,
   },
   {
     path: "/admin_profile",
